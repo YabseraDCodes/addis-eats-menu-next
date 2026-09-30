@@ -1,5 +1,6 @@
 import React from 'react'
 import dishes from "../../../public/dishes.json";
+import { notFound } from 'next/navigation';
 
 type Props = {
     params: Promise<{
@@ -13,7 +14,7 @@ async function DishDetail({ params }: Props) {
 
     const dish = dishes.items.find((item) => Number(id) === item.id)
     if (!dish) {
-        return <h1>Dish not found</h1>;
+        notFound();
     }
     return (
         <div>

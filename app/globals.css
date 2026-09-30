@@ -2014,3 +2014,146 @@ h6 {
     width: 100%;
   }
 }
+
+
+/* ========================================
+   MENU LOADING
+======================================== */
+
+.menu-loading {
+  min-height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 50px 20px;
+
+  text-align: center;
+}
+
+.menu-loading h1 {
+  margin: 20px 0 8px;
+
+  color: var(--brown-dark);
+
+  font-size: 32px;
+}
+
+.menu-loading p {
+  color: var(--brown-light);
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+
+  border: 5px solid var(--cream-dark);
+  border-top-color: var(--orange);
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ========================================
+   MENU ERROR
+======================================== */
+
+.menu-error {
+  min-height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 50px 20px;
+
+  text-align: center;
+}
+
+.menu-error h1 {
+  margin: 10px 0;
+
+  color: var(--brown-dark);
+
+  font-size: 38px;
+}
+
+.menu-error p:not(.section-label) {
+  margin-bottom: 25px;
+
+  color: var(--brown-light);
+}
+
+.error-retry-btn {
+  padding: 11px 22px;
+
+  border: none;
+  border-radius: 9px;
+
+  background-color: var(--brown-dark);
+  color: white;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.error-retry-btn:hover {
+  background-color: var(--orange-dark);
+
+  transform: translateY(-2px);
+}
+
+
+/* ========================================
+   NOT FOUND
+======================================== */
+
+.dish-not-found {
+  min-height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 50px 20px;
+
+  text-align: center;
+}
+
+.dish-not-found h1 {
+  margin: 10px 0;
+
+  color: var(--brown-dark);
+
+  font-size: 38px;
+}
+
+.dish-not-found p:not(.section-label) {
+  margin-bottom: 25px;
+
+  color: var(--brown-light);
+}
+
+.dish-not-found .back-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+}
