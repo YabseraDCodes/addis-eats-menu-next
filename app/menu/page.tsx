@@ -18,11 +18,10 @@ export default async function MenuPage({
 }: {
   searchParams: Promise<{ category?: string }>;
 }) {
-  // throw new Error("Testing menu error");
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
   const params = await searchParams;
-
+  
   const selectedCategory = params.category as Category | undefined;
 
   const filteredDishes = selectedCategory
