@@ -39,10 +39,7 @@ export default async function MenuPage({
           <h1>Addis Eats Menu</h1>
         </div>
 
-        <nav className="navigation">
-          <Link href="/">Home</Link>
-          <Link href="/menu">Menu</Link>
-        </nav>
+        
       </section>
 
       {/* Menu */}
