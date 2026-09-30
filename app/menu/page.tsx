@@ -1,5 +1,7 @@
 import Link from "next/link";
 import dishesData from "../../public/dishes.json";
+import { DishList } from "./DishList";
+import { CategoryBar } from "./CatagoryBar";
 
 type Category = "ALL" | "MAIN" | "BREAKFAST" | "DRINK" | "DESSERT";
 
@@ -16,14 +18,17 @@ export default async function MenuPage({
 }: {
   searchParams: Promise<{ category?: string }>;
 }) {
+  // throw new Error("Testing menu error");
+  // await new Promise((resolve) => setTimeout(resolve, 3000));
+
   const params = await searchParams;
 
   const selectedCategory = params.category as Category | undefined;
 
-  const dishes = selectedCategory
+  const filteredDishes = selectedCategory
     ? dishesData.items.filter(
-        (dish) => dish.category === selectedCategory
-      )
+      (dish) => dish.category === selectedCategory
+    )
     : dishesData.items;
 
   return (
@@ -48,8 +53,8 @@ export default async function MenuPage({
           <h2>
             {selectedCategory
               ? categories.find(
-                  (category) => category.value === selectedCategory
-                )?.name
+                (category) => category.value === selectedCategory
+              )?.name
               : "All Dishes"}
           </h2>
 
@@ -59,76 +64,9 @@ export default async function MenuPage({
         </div>
 
         {/* Categories */}
-        <div className="category-filter">
-          {categories.map((category) => (
-            <Link
-              key={category.value}
-              href={
-                category.value === "ALL"
-                  ? "/menu"
-                  : `/menu?category=${category.value}`
-              }
-              className={
-                selectedCategory === category.value ||
-                (!selectedCategory && category.value === "ALL")
-                  ? "active"
-                  : ""
-              }
-            >
-              {category.name}
-            </Link>
-          ))}
-        </div>
+        <CategoryBar categories={categories} selectedCategory={selectedCategory} />
 
-        {/* Dishes */}
-        {dishes.length > 0 ? (
-          <div className="items">
-            {dishes.map((dish) => (
-              <article key={dish.id} className="food-card">
-                <div>
-                  <h3>{dish.name}</h3>
-
-                  <p>{dish.description}</p>
-
-                  {dish.spicy && (
-                    <span className="spicy-badge">
-                      🌶️ Spicy
-                    </span>
-                  )}
-                </div>
-
-                <div className="food-bottom">
-                  <span className="price">
-                    {dish.price} ETB
-                  </span>
-
-                  <span
-                    className={`catagory catagory-${dish.category}`}
-                  >
-                    {dish.category}
-                  </span>
-                </div>
-
-                <div className="item-actions">
-                  <button className="addBtn">
-                    Add to Order
-                  </button>
-
-                  <Link
-                    href={`/menu/${dish.id}`}
-                    className="viewDetails"
-                  >
-                    Details
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <p className="empty-state">
-            No dishes found in this category.
-          </p>
-        )}
+        <DishList dishes={filteredDishes} />
       </section>
     </main>
   );
