@@ -2,6 +2,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import dishesData from "../../../public/dishes.json";
 
+export async function generateStaticParams() {
+  return dishesData.items.map((dish) => ({
+    id: String(dish.id),
+  }));
+}
+
 export default async function DishPage({
   params,
 }: {
