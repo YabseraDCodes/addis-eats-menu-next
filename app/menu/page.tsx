@@ -18,10 +18,10 @@ export default async function MenuPage({
 }: {
   searchParams: Promise<{ category?: string }>;
 }) {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  // await new Promise((resolve) => setTimeout(resolve, 3000));
 
   const params = await searchParams;
-  
+
   const selectedCategory = params.category as Category | undefined;
 
   const filteredDishes = selectedCategory
@@ -32,14 +32,6 @@ export default async function MenuPage({
 
   return (
     <main>
-      {/* Header */}
-      <section className="Header">
-        <div className="Title">
-          <h1>Addis Eats Menu</h1>
-        </div>
-
-        
-      </section>
 
       {/* Menu */}
       <section className="home-section">
@@ -60,8 +52,9 @@ export default async function MenuPage({
         </div>
 
         {/* Categories */}
-        <CategoryBar categories={categories} selectedCategory={selectedCategory} />
-
+        <div className="top-category">
+          <CategoryBar categories={categories} selectedCategory={selectedCategory} />
+        </div>
         <DishList dishes={filteredDishes} />
       </section>
     </main>
