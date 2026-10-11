@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from "react";
 import { categories } from '@/data/categories'
 import { CategoryBar } from './CatagoryBar'
 
@@ -12,8 +12,9 @@ function CategoryLayout({ children }: LayoutProps<"/">) {
       </section>
       <div className='menu-layout'>
         <aside className='side-category'>
-          <CategoryBar categories={categories} />
-        </aside>
+          <Suspense fallback={<div>Loading categories...</div>}>
+            <CategoryBar categories={categories} />
+          </Suspense>        </aside>
         <main>{children}</main>
       </div>
     </div>
