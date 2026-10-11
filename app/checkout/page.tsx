@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+// This read requires dynamic rendering because checkout
+// must use the current request's data rather than static output.
+
 export default function CheckoutPage() {
   return (
     <main className="checkout-page">
