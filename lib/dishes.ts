@@ -37,9 +37,7 @@ export async function  getaCategories() {
     return categories;
 }
 
-export async function getDishById(
-  id: number
-): Promise<Dish | undefined> {
+export async function getDishById( id: number): Promise<Dish | undefined> {
   const dishes = await getDishes();
 
   return dishes.find((dish) => dish.id === id);
