@@ -9,16 +9,52 @@ export default function CheckoutForm() {
     const [dishId, setDishId] = useState("");
     const [quantity, setQuantity] = useState(1);
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        // console.log({
-        //     name,
-        //     phone,
-        //     address,
-        //     dishId,
-        //     quantity,
-        // });
+        setLoading(true);
+        setMessage("");
+
+        try {
+            const response = await fetch("http://localhost:3000/api/orders", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name,
+                    phone,
+                    address,
+                    dishId: Number(dishId),
+                    quantity,
+                }),
+            });
+
+            const data = await response.json().catch(() => null);
+
+            if (!response.ok) {
+                throw new Error(data?.message || "Failed to place order.");
+            }
+
+            setMessage("Order placed successfully!");
+
+            setName("");
+            setPhone("");
+            setAddress("");
+            setDishId("");
+            setQuantity(1);
+
+        } catch (error) {
+            setMessage(
+                error instanceof Error
+                    ? error.message
+                    : "Something went wrong. Please try again."
+            );
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -69,6 +105,19 @@ export default function CheckoutForm() {
             />
 
             <button type="submit">Place Order</button>
+            {message && (
+                <p
+                    role="status"
+                    style={{
+                        color: message.startsWith("Order placed successfully")
+                            ? "green"
+                            : "red",
+                        marginTop: "12px",
+                    }}
+                >
+                    {message}
+                </p>
+            )}
         </form>
     );
 }
